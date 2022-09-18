@@ -12,8 +12,12 @@
         android:layout_height="200dp"
         android:gravity="center"
         android:text="Who was the president of the United States during 2016?"
+        android:textColor="#636B61"
         android:textSize="40sp"
-        android:background="#03a1fc"/>
+        android:background="@drawable/card_background"
+        android:elevation="5dp"
+        android:layout_marginBottom="20sp"/>
+
 
     <TextView
         android:id="@+id/flashcard_answer"
@@ -22,6 +26,50 @@
         android:layout_height="200dp"
         android:gravity="center"
         android:text="Barack Obama"
+        android:textColor="#AFA2FF"
         android:textSize="40sp"
-        android:background="#a5f53d"/>
+        android:background="#a5f53d"
+        android:layout_marginBottom="20sp"/>
+
+    <TextView
+        android:id="@+id/answer1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:text="Benjamin Franklin"
+        android:textSize="40sp"
+        android:textColor="#5E503F"
+        android:background="@drawable/my_border"
+        android:layout_below="@id/flashcard_question"
+        android:layout_marginBottom="15sp" />
+    <TextView
+        android:id="@+id/answer2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:text="Thomas the Train"
+        android:textSize="40sp"
+        android:textColor="#5E503F"
+        android:background="@drawable/my_border"
+        android:layout_below="@id/answer1"
+        android:layout_marginBottom="15sp" />
+    <TextView
+        android:id="@+id/answer3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:text="Barack Obama"
+        android:textSize="40sp"
+        android:textColor="#5E503F"
+        android:background="@drawable/my_border"
+        android:layout_below="@id/answer2"
+        android:layout_marginBottom="30sp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/toggle_choices_visibility"
+        android:src="@drawable/eye_on"
+        android:layout_below="@id/answer3"/>
 </RelativeLayout>
