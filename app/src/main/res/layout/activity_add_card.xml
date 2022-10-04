@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".AddCardActivity">
+
+    <EditText
+        android:id="@+id/answerField3"
+        android:layout_width="336dp"
+        android:layout_height="84dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="486dp"
+        android:hint="Correct Answer Choice"
+        android:inputType="text"
+        android:textColorHighlight="#d3cdd7"></EditText>
+
+    <EditText
+        android:id="@+id/answerField2"
+        android:layout_width="336dp"
+        android:layout_height="84dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="371dp"
+        android:hint="Wrong Answer Choice"
+        android:inputType="text"
+        android:textColorHighlight="#d3cdd7"></EditText>
+
+    <ImageView
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_cancel"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        />
+
+    <ImageView
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/save_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        />
+
+
+    <EditText
+        android:id="@+id/questionField"
+        android:layout_width="wrap_content"
+        android:layout_height="84dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="546dp"
+        android:hint="Question"
+        android:textColorHighlight="#d3cdd7"></EditText>
+
+    <EditText
+        android:id="@+id/answerField"
+        android:layout_width="336dp"
+        android:layout_height="84dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="249dp"
+        android:hint="Wrong Answer Choice"
+        android:inputType="text"
+        android:textColorHighlight="#d3cdd7"></EditText>
+
+
+</RelativeLayout>

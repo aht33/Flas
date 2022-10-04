@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Alex/AndroidStudioProjects/Flas/app/src/main/res/drawable/card_background.xml" value="0.1785" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/Flas/app/src/main/res/drawable/icon_add.xml" value="0.184" />
         <entry key="..\:/Users/Alex/AndroidStudioProjects/Flas/app/src/main/res/drawable/my_border.xml" value="0.1" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/Flas/app/src/main/res/layout/activity_add_card.xml" value="0.22" />
         <entry key="..\:/Users/Alex/AndroidStudioProjects/Flas/app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>
