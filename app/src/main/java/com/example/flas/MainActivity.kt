@@ -12,11 +12,27 @@ import com.google.android.material.snackbar.Snackbar
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
+    lateinit var flashcardDatabase: FlashcardDatabase
+    var allFlashcards = mutableListOf<Flashcard>()
+    var currCardDisplayedIndex = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        flashcardDatabase = FlashcardDatabase(this)
+        allFlashcards = flashcardDatabase.getAllCards().toMutableList()
+
         val flashcardQuestion = findViewById<TextView>(R.id.flashcard_question)
         val flashcardAnswer = findViewById<TextView>(R.id.flashcard_answer)
+        val answerChoice1 = findViewById<TextView>(R.id.answer1)
+        val answerChoice2 = findViewById<TextView>(R.id.answer2)
+        val answerChoice3 = findViewById<TextView>(R.id.answer3)
+
+        if (allFlashcards.size > 0) {
+            flashcardQuestion.text = allFlashcards[0].question
+            answerChoice1.text = allFlashcards[0].wrongAnswer1
+            answerChoice2.text = allFlashcards[0].wrongAnswer2
+            answerChoice3.text = allFlashcards[0].answer
+        }
         flashcardQuestion.setOnClickListener {
                 flashcardQuestion.visibility = View.INVISIBLE
                 flashcardAnswer.visibility = View.VISIBLE
@@ -26,20 +42,40 @@ class MainActivity : AppCompatActivity() {
             flashcardQuestion.visibility = View.VISIBLE
         }
 
-        val answerChoice1 = findViewById<TextView>(R.id.answer1)
-        val answerChoice2 = findViewById<TextView>(R.id.answer2)
-        val answerChoice3 = findViewById<TextView>(R.id.answer3)
+        var answerColor1 = false
+        var answerColor2 = false
+        var answerColor3 = false
+
         answerChoice1.setOnClickListener {
-            answerChoice1.setBackgroundColor(resources.getColor(R.color.red))
-            answerChoice3.setBackgroundColor(resources.getColor(R.color.green))
+            if(answerColor1) {
+                answerChoice1.setBackgroundColor(resources.getColor(R.color.border))
+                answerColor1 = false
+            } else {
+                answerChoice1.setBackgroundColor(resources.getColor(R.color.red))
+                answerChoice3.setBackgroundColor(resources.getColor(R.color.green))
+                answerColor1 = true
+            }
         }
         answerChoice2.setOnClickListener {
-            answerChoice2.setBackgroundColor(resources.getColor(R.color.red))
-            answerChoice3.setBackgroundColor(resources.getColor(R.color.green))
+            if(answerColor2) {
+                answerChoice2.setBackgroundColor(resources.getColor(R.color.border))
+                answerColor2 = false
+            } else {
+                answerChoice2.setBackgroundColor(resources.getColor(R.color.red))
+                answerChoice3.setBackgroundColor(resources.getColor(R.color.green))
+                answerColor2 = true
+            }
         }
         answerChoice3.setOnClickListener {
-            answerChoice3.setBackgroundColor(resources.getColor(R.color.green))
+            if(answerColor3) {
+                answerChoice3.setBackgroundColor(resources.getColor(R.color.border))
+                answerColor1 = false
+            } else {
+                answerChoice3.setBackgroundColor(resources.getColor(R.color.green))
+                answerColor3 = true
+            }
         }
+
         var isShowingAnswers = true
         val toggleChoice = findViewById<ImageView>(R.id.toggle_choices_visibility)
         toggleChoice.setOnClickListener {
@@ -58,7 +94,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
         val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result ->
 
@@ -75,6 +110,10 @@ class MainActivity : AppCompatActivity() {
                 answerChoice2.text = answerString2
                 answerChoice3.text = answerString3
 
+                if(questionString != null && answerString1 != null && answerString2 != null && answerString3 != null) {
+                    flashcardDatabase.insertCard(Flashcard(questionString, answerString1, answerString2, answerString3))
+                    allFlashcards = flashcardDatabase.getAllCards().toMutableList()
+                }
 
                 Log.i("Alex:Main Activity", "question: $questionString")
                 Log.i("Alex:Main Activity", "question $answerString1")
@@ -106,5 +145,31 @@ class MainActivity : AppCompatActivity() {
                 startActivity(it)
             }
         }
+
+        val nextButton = findViewById<ImageView>(R.id.next_button)
+        nextButton.setOnClickListener {
+
+            if(allFlashcards.isEmpty()) {
+                //early return
+                return@setOnClickListener
+            }
+            currCardDisplayedIndex++
+
+            if(currCardDisplayedIndex >= allFlashcards.size) {
+                currCardDisplayedIndex = 0
+            }
+            allFlashcards = flashcardDatabase.getAllCards().toMutableList()
+
+            val question = allFlashcards[currCardDisplayedIndex].question
+            val answer = allFlashcards[currCardDisplayedIndex].answer
+            val wrongAnswer1 = allFlashcards[currCardDisplayedIndex].wrongAnswer1
+            val wrongAnswer2 = allFlashcards[currCardDisplayedIndex].wrongAnswer2
+
+            flashcardQuestion.text = question
+            answerChoice1.text = wrongAnswer1
+            answerChoice2.text = wrongAnswer2
+            answerChoice3.text = answer
+            }
+
         }
 }

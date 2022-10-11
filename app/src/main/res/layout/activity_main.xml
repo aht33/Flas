@@ -35,13 +35,13 @@
         android:id="@+id/answer1"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_below="@id/flashcard_question"
+        android:layout_marginBottom="15sp"
+        android:background="@drawable/my_border"
         android:gravity="center"
         android:text="Benjamin Franklin"
-        android:textSize="40sp"
         android:textColor="#5E503F"
-        android:background="@drawable/my_border"
-        android:layout_below="@id/flashcard_question"
-        android:layout_marginBottom="15sp" />
+        android:textSize="40sp" />
     <TextView
         android:id="@+id/answer2"
         android:layout_width="match_parent"
@@ -90,4 +90,15 @@
         android:layout_alignParentBottom="true"
         />
 
+    <ImageView
+        android:id="@+id/next_button"
+        android:layout_width="122dp"
+        android:layout_height="86dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="273dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="73dp"
+        android:src="@drawable/next_button" />
 </RelativeLayout>
