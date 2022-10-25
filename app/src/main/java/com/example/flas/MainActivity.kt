@@ -3,8 +3,13 @@ package com.example.flas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -125,10 +130,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
         val addFlashcardButton = findViewById<ImageView>(R.id.add_question_button)
         addFlashcardButton.setOnClickListener {
             val add = Intent(this, AddCardActivity::class.java)
             resultLauncher.launch(add)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
 
         val editFlashcardButton = findViewById<ImageView>(R.id.edit_button)
@@ -144,6 +151,19 @@ class MainActivity : AppCompatActivity() {
                 it.putExtra("EANSWER3", answerString3)
                 startActivity(it)
             }
+        }
+
+        var countDownTimer: CountDownTimer? = null
+        countDownTimer = object : CountDownTimer(16000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                findViewById<TextView>(R.id.timer).text = "Timer: " + millisUntilFinished / 1000 + "s"
+            }
+            override fun onFinish() {}
+        }
+
+        fun startTimer() {
+            countDownTimer?.cancel()
+            countDownTimer?.start()
         }
 
         val nextButton = findViewById<ImageView>(R.id.next_button)
@@ -169,7 +189,36 @@ class MainActivity : AppCompatActivity() {
             answerChoice1.text = wrongAnswer1
             answerChoice2.text = wrongAnswer2
             answerChoice3.text = answer
+
+            val leftOutAnim = AnimationUtils.loadAnimation(this, R.anim.left_out)
+            val rightInAnim = AnimationUtils.loadAnimation(this, R.anim.right_in)
+
+            leftOutAnim.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    flashcardQuestion.startAnimation(rightInAnim)
+                    answerChoice1.startAnimation(rightInAnim)
+                    answerChoice2.startAnimation(rightInAnim)
+                    answerChoice3.startAnimation(rightInAnim)
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+                    TODO("Not yet implemented")
+                }
+            })
+            flashcardQuestion.startAnimation(leftOutAnim)
+            answerChoice1.startAnimation(leftOutAnim)
+            answerChoice2.startAnimation(leftOutAnim)
+            answerChoice3.startAnimation(leftOutAnim)
+
+            startTimer()
             }
 
+
+
+            startTimer()
         }
 }

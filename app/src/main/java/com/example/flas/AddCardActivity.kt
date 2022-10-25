@@ -17,6 +17,7 @@ class AddCardActivity : AppCompatActivity() {
         val cancelButton = findViewById<ImageView>(R.id.cancel_button)
         cancelButton.setOnClickListener {
             this.finish()
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
 
         val questionText = findViewById<EditText>(R.id.questionField)
@@ -44,7 +45,6 @@ class AddCardActivity : AppCompatActivity() {
                 setResult(RESULT_OK, data)
                 finish()
             }
-
         }
 
         val questionToEdit = intent.getStringExtra("EQUESTION")
